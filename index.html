@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Begin the Journey</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    button {
+      background: #ff69b4;
+      border: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #ff69b4;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .caption {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    #readyBtn {
+      display: none;
+    }
+
+    #heart-container {
+      display: none;
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ff69b4;
+      transition: all 1s ease;
+    }
+
+    #message {
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      text-align: center;
+      font-size: 32px;
+      font-family: 'Brush Script MT', cursive;
+      color: white;
+      text-shadow: 0 0 20px pink;
+      opacity: 0;
+      animation: fadeIn 2s forwards 3s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 4s linear infinite;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart:after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" src="https://files.catbox.moe/pjmxo8.mp3" preload="auto"></audio>
+
+  <div class="centered">
+    <button id="sorryBtn">Sorry</button>
+    <div class="caption">Tap on sorry</div>
+    <button id="readyBtn">🎁 Are you ready?</button>
+  </div>
+
+  <div id="heart-container">
+    <div id="message">I love you sweetheart forever</div>
+  </div>
+
+  <script>
+    const sorryBtn = document.getElementById('sorryBtn');
+    const readyBtn = document.getElementById('readyBtn');
+    const heartContainer = document.getElementById('heart-container');
+    const music = document.getElementById('bgMusic');
+
+    sorryBtn.onclick = () => {
+      sorryBtn.style.display = "none";
+      readyBtn.style.display = "inline-block";
+    };
+
+    readyBtn.onclick = () => {
+      readyBtn.style.display = "none";
+      heartContainer.style.display = "block";
+      music.play();
+
+      // Fireworks sound + star particles
+      createFireworks();
+      createFloatingHearts();
+      showHeartImages();
+    };
+
+    function createFloatingHearts() {
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.background = Math.random() > 0.5 ? "pink" : "#ff69b4";
+        heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+        document.body.appendChild(heart);
+      }
+    }
+
+    function showHeartImages() {
+      const container = document.getElementById("heart-container");
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const r = 200;
+
+      const imageUrls = [
+        "https://i.ibb.co/ZvsszqY/74022-DD7-8-A77-499-B-AD48-B434418-A07-DF.png",
+        "https://i.ibb.co/mr8Ts3bj/IMG-3713.jpg",
+        "https://i.ibb.co/212dc58G/IMG-3682.jpg",
+        "https://i.ibb.co/JFnRgvhn/IMG-2265.jpg",
+        "https://i.ibb.co/6RxyqmsJ/IMG-2259.jpg",
+        "https://i.ibb.co/N286QdRW/IMG-1840.jpg",
+        "https://i.ibb.co/6JqB9yNG/IMG-1167.jpg",
+        "https://i.ibb.co/sp4DqPVw/061a4f7e-769b-4a75-9093-cf1f3b7dfc33.jpg",
+        "https://i.ibb.co/fYdXsGmc/3d7ad99c-f7b5-4f91-ab90-059b6d784041.jpg",
+        "https://i.ibb.co/WNkmFts1/IMG-8588.jpg",
+        "https://i.ibb.co/PG42RPLX/IMG-8587.jpg",
+        "https://i.ibb.co/Ng6mBp3Q/3-FAA830-C-C295-4319-BEAA-A0-FEB5-BF62-AC.jpg",
+        "https://i.ibb.co/JWgtvPLJ/939b3a43-cfeb-4486-a9b0-dc0daca955eb.jpg",
+        "https://i.ibb.co/qYyk5Cgd/IMG-4088.jpg",
+        "https://i.ibb.co/Kpm8Lf4x/IMG-4085.jpg",
+        "https://i.ibb.co/nNRG3vCc/IMG-2256.jpg",
+        "https://i.ibb.co/chs0BxfP/IMG-2263.jpg",
+        "https://i.ibb.co/dYgJZqF/IMG-1109.jpg",
+        "https://i.ibb.co/xq4WJQvD/3293e8ec-0ace-4f9b-a5b8-198f2957542e.jpg",
+        "https://i.ibb.co/BKjPRcdc/95648506-2903-4483-8b76-ee72e99a6cf3.jpg"
+      ];
+
+      imageUrls.forEach((url, i) => {
+        const angle = (Math.PI * 2 * i) / imageUrls.length;
+        const x = centerX + r * 16 * Math.pow(Math.sin(angle), 3);
+        const y = centerY - r * (13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle));
+        const img = document.createElement("img");
+        img.src = url;
+        img.className = "image";
+        img.style.left = x + "px";
+        img.style.top = y + "px";
+        container.appendChild(img);
+        setTimeout(() => img.style.opacity = 1, i * 200);
+      });
+    }
+
+    function createFireworks() {
+      // Basic visual burst using emojis and opacity
+      for (let i = 0; i < 10; i++) {
+        const burst = document.createElement("div");
+        burst.innerText = "🎆";
+        burst.style.position = "fixed";
+        burst.style.fontSize = "40px";
+        burst.style.left = Math.random() * 100 + "vw";
+        burst.style.top = Math.random() * 100 + "vh";
+        burst.style.opacity = 0;
+        burst.style.transition = "opacity 1s ease";
+        document.body.appendChild(burst);
+        setTimeout(() => burst.style.opacity = 1, 300);
+        setTimeout(() => burst.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>
